@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocaFlix - Apresentação do Projeto</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@300;500;700&display=swap" rel="stylesheet" />
+
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* --- VARIÁVEIS E RESET --- */
+      :root {
+        --primary-color: #3b82f6; /* Azul Vibrante */
+        --primary-hover: #2563eb;
+        --bg-body: #0f1115;       /* Fundo quase preto */
+        --bg-card: #1a1d21;       /* Cinza escuro para cartões */
+        --bg-header: rgba(15, 17, 21, 0.95);
+        --text-main: #f3f4f6;     /* Branco gelo */
+        --text-muted: #9ca3af;    /* Cinza claro */
+        --border-color: #2a2f36;
+        --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.15);
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-main);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      h1, h2, h3, .logo-text {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      a { text-decoration: none; }
+      ul { list-style: none; }
+
+      /* --- LAYOUT UTILS --- */
+      .wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .section {
+        padding: 80px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+
+      .section h2 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 50px;
+        color: var(--text-main);
+        position: relative;
+        display: inline-block;
+        width: 100%;
+      }
+      
+      /* Detalhe decorativo abaixo do título */
+      .section h2::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: var(--primary-color);
+        margin: 15px auto 0;
+        border-radius: 2px;
+      }
+
+      /* --- HEADER --- */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        background-color: var(--bg-header);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between; /* Logo na esquerda, Nav na direita */
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .logo-text {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      
+      .logo-text span { color: var(--primary-color); }
+
+      .nav-buttons {
+        display: flex;
+        gap: 15px;
+      }
+
+      .btn {
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: var(--transition);
+        font-family: 'Inter', sans-serif;
+      }
+
+      .btn-outline {
+        border: 2px solid var(--border-color);
+        color: var(--text-main);
+        background: transparent;
+      }
+      .btn-outline:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+      }
+      .btn-primary:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        transform: translateY(-2px);
+      }
+
+      /* --- HERO SECTION --- */
+      .hero {
+        height: 80vh;
+        min-height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        /* Gradiente cinemático */
+        background: radial-gradient(circle at center, #1f2329 0%, #0f1115 100%);
+        position: relative;
+        overflow: hidden;
+        margin-top: 80px; /* Compensa o header fixo */
+      }
+
+      /* Efeito de brilho no fundo */
+      .hero::before {
+        content: '';
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: var(--primary-color);
+        filter: blur(150px);
+        opacity: 0.15;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        background: linear-gradient(to right, #fff, #94a3b8);
+        -webkit-background-clip: text; /* Vendor prefix necessário para suporte antigo/safari */
+        background-clip: text;         /* Propriedade padrão */
+        -webkit-text-fill-color: transparent;
+        color: transparent;            /* Fallback padrão */
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        margin-bottom: 40px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* --- CARDS & GRID --- */
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .card {
+        background: var(--bg-card);
+        padding: 40px 30px;
+        border-radius: 16px;
+        border: 1px solid var(--border-color);
+        text-align: center;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .card i {
+        color: var(--primary-color);
+        width: 48px;
+        height: 48px;
+        margin-bottom: 20px;
+      }
+
+      .card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: var(--text-main);
+      }
+
+      .card p {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      /* --- VIDEO EMBED --- */
+      .embed-container {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        background: #000;
+      }
+
+      .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+      }
+
+      .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* --- MIRO PLACEHOLDER --- */
+      .miro-box {
+        background: linear-gradient(145deg, #1a1d21, #131518);
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px dashed var(--border-color);
+        border-radius: 20px;
+        color: var(--text-muted);
+        transition: var(--transition);
+      }
+      
+      .miro-box:hover {
+        border-color: var(--primary-color);
+        background: rgba(59, 130, 246, 0.05);
+      }
+
+      /* --- TEAM --- */
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+      }
+
+      .team-member {
+        background: var(--bg-card);
+        padding: 30px 20px;
+        border-radius: 16px;
+        text-align: center;
+        border: 1px solid transparent;
+        transition: var(--transition);
+      }
+
+      .team-member:hover {
+        border-color: var(--border-color);
+        background: #22262b;
+      }
+
+      .team-member img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%; /* Foto redonda */
+        object-fit: cover;
+        margin-bottom: 20px;
+        border: 3px solid var(--primary-color);
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+      }
+
+      .team-member h3 {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        color: var(--text-main);
+      }
+
+      .team-member p {
+        font-size: 0.9rem;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      /* --- CTA / GITHUB --- */
+      .github-card {
+        background: linear-gradient(135deg, #1f2937, #111827);
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 50px;
+        border-radius: 20px;
+        text-align: center;
+        border: 1px solid var(--border-color);
+      }
+
+      .btn-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 25px;
+        background: var(--text-main);
+        color: #000;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        transition: var(--transition);
+      }
+      .btn-cta:hover {
+        background: var(--primary-color);
+        color: #fff;
+        transform: scale(1.05);
+      }
+
+      /* --- FOOTER --- */
+      .footer {
+        padding: 40px 0;
+        text-align: center;
+        border-top: 1px solid var(--border-color);
+        background: #0a0b0e;
+        color: var(--text-muted);
+      }
+      .footer p { margin-top: 10px; font-size: 0.9rem; }
+
+      /* --- ANIMAÇÃO SCROLL --- */
+      .hidden-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .visible-scroll {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* RESPONSIVO */
+      @media (max-width: 768px) {
+        .hero h1 { font-size: 2.5rem; }
+        .header-container { flex-direction: column; gap: 15px; }
+        .nav-buttons { width: 100%; justify-content: center; }
+        .grid-3 { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- HEADER ESTRUTURADO -->
+    <header class="header">
+      <div class="header-container">
+        <!-- Lado Esquerdo: Logo -->
+        <a href="#" class="logo-text">LocaFlix<span>⭐</span></a>
+        
+        <!-- Lado Direito: Botões -->
+        <nav class="nav-buttons">
+          <a class="btn btn-outline" href="index.html">Site Oficial</a>
+          <a class="btn btn-primary" href="index_login.html">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hidden-scroll">LocaFlix: O Cinema na Sua Mão</h1>
+          <p class="hidden-scroll">
+            Somos uma locadora moderna. Facilitamos a sua vida sem contratos complexos. 
+            Sem mensalidades, pague somente pelo que assistir.
+          </p>
+          <a href="#diferenciais" class="btn btn-primary hidden-scroll">Saiba Mais</a>
+        </div>
+      </section>
+
+      <!-- DIFERENCIAIS -->
+      <section id="diferenciais" class="section">
+        <div class="wrapper">
+          <h2 class="hidden-scroll">Por que escolher a Locaflix?</h2>
+          <div class="grid-3">
+
+            <div class="card hidden-scroll">
+              <i data-lucide="wallet"></i>
+              <h3>Zero Mensalidade</h3>
+              <p>Esqueça os planos mensais caros. Aqui você tem liberdade total para pagar apenas pelo título que deseja ver.</p>
+            </div>
+
+            <div class="card hidden-scroll">
+              <i data-lucide="film"></i>
+              <h3>Catálogo Premium</h3>
+              <p>Curadoria focada em lançamentos de alto impacto e clássicos renomados do cinema mundial.</p>
+            </div>
+
+            <div class="card hidden-scroll">
+              <i data-lucide="shield-check"></i>
+              <h3>Transparência</h3>
+              <p>Preço único de <strong>R$ 7,90</strong> por aluguel. Sem taxas escondidas, sem surpresas na fatura.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- VIDEO -->
+      <section class="section" style="background: #15181c;">
+        <div class="wrapper">
+          <h2 class="hidden-scroll">Conceito Visual</h2>
+          <div class="embed-container hidden-scroll">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/5D_1Yd2u85Q" 
+                title="Vídeo Conceito LocaFlix" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DESIGN SPRINT -->
+      <section class="section">
+        <div class="wrapper">
+          <h2 class="hidden-scroll">Processo de Desenvolvimento</h2>
+          <p class="hidden-scroll" style="text-align:center;color:var(--text-muted);margin-bottom:40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Utilizamos a metodologia <strong>Design Sprint</strong> para validar ideias e prototipar soluções rapidamente.
+          </p>
+
+          <div class="miro-box hidden-scroll">
+            <i data-lucide="trello" style="width:60px;height:60px;margin-bottom:20px; color: var(--primary-color);"></i>
+            <h3 style="color:white; margin-bottom: 10px;">Artefatos do Projeto</h3>
+            <p>Embed do Quadro Miro / Planejamento</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- EQUIPE -->
+      <section class="section" style="background: #15181c;">
+        <div class="wrapper">
+          <h2 class="hidden-scroll">Nosso Time</h2>
+
+          <div class="team-grid">
+            <div class="team-member hidden-scroll">
+              <img src="https://placehold.co/200x200/1a1d22/3b82f6?text=AS" alt="Arthur" />
+              <h3>Arthur Salesse</h3>
+              <p>Desenvolvimento</p>
+            </div>
+
+            <div class="team-member hidden-scroll">
+              <img src="https://placehold.co/200x200/1a1d22/3b82f6?text=JL" alt="João" />
+              <h3>João Lourenço</h3>
+              <p>Decisor</p>
+            </div>
+
+            <div class="team-member hidden-scroll">
+              <img src="https://placehold.co/200x200/1a1d22/3b82f6?text=OP" alt="Otávio" />
+              <h3>Otávio Pasqual</h3>
+              <p>Designer</p>
+            </div>
+
+            <div class="team-member hidden-scroll">
+              <img src="https://placehold.co/200x200/1a1d22/3b82f6?text=LF" alt="Leonardo" />
+              <h3>Leonardo Furlan</h3>
+              <p>Dev Fullstack</p>
+            </div>
+
+            <div class="team-member hidden-scroll">
+              <img src="https://placehold.co/200x200/1a1d22/3b82f6?text=RA" alt="Rafael" />
+              <h3>Rafael Afonso</h3>
+              <p>Marketing</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GITHUB -->
+      <section class="section">
+        <div class="wrapper">
+          <h2 class="hidden-scroll">Acesse o Código</h2>
+          <div class="github-card hidden-scroll">
+            <i data-lucide="github" style="width: 50px; height: 50px; color: white; margin-bottom: 20px;"></i>
+            <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">Repositório Oficial</h3>
+            <p style="color: #9ca3af; margin-bottom: 0;">Explore a documentação técnica, commits e estrutura do projeto.</p>
+            <a href="https://github.com/ArthurSalesse/Projeto_final_ihc" target="_blank" class="btn-cta">
+              <i data-lucide="external-link" style="width: 18px;"></i>
+              Ver no GitHub
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="logo-text" style="justify-content: center; margin-bottom: 10px;">LocaFlix<span>⭐</span></div>
+      <p>© 2025 - LocaFlix. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible-scroll');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.hidden-scroll').forEach((el) => observer.observe(el));
+    </script>
+
+  </body>
+</html>

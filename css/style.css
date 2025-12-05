@@ -1,0 +1,411 @@
+/* ================================================= */
+/* --- ESTILOS BASE (Padrão para todas as páginas) --- */
+/* ================================================= */
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #0d0f12; /* Fundo padrão do projeto */
+  color: #e6e6e6; /* Texto padrão */
+  font-family: sans-serif;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* --- Cabeçalho Padrão --- */
+.cabecalho{
+  background-color: #1a1d22;
+  height: 85px;
+  border-bottom: 1px solid #2a2f36;
+}
+
+.lista__cabecalho{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 50px;
+  height: 100%;
+  font-size: 20px;
+}
+
+/* CORREÇÃO: Garante que o Login e o Carrinho fiquem lado a lado */
+.lista__cabecalho article {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espaço entre login e carrinho */
+}
+
+.cabecalho p,
+.cabecalho__click{
+  background-color: #0d0f12;
+  color: #7bb4ff;
+  border: 1px solid #2a2f36;
+  padding: 8px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.cabecalho__click:hover{
+  box-shadow: 0 0 10px #1e4fa8;
+  background-color: #1a1d22;
+  transform: translateY(-2px);
+}
+
+/* --- Hero (Index.html) --- */
+.imagem__principal{
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 85px);
+  background-image: url('../imagens/DemonSlayer.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.overtext {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 15, 18, 0.85); /* Fundo escuro transparente padrão */
+}
+.titulo__imagem{
+    color: #7bb4ff;
+    font-size: 40px;
+    margin-left: 50px;
+    margin-top: 60px;
+    text-shadow: 0 0 8px #1a3a5f;
+}
+.descricao__imagem{
+    font-size: 20px;
+    margin-left: 50px;
+    margin-top: 150px;
+    color: #d5d5d5;
+}
+.imdb, .classificacao{
+    display: block;
+    margin-left: 50px;
+    font-size: 20px;
+    color: #7bb4ff;
+}
+.overtext button{
+    margin-left: 50px;
+    padding: 12px 25px;
+    background: #2376ff;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 0 10px #1e4fa8;
+    transition: 0.2s;
+}
+
+/* --- Footer Padrão --- */
+.footer{
+  height: 130px;
+  background-color: #1a1d22;
+  border-top: 1px solid #2a2f36;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logo__footer{
+  font-size: 20px;
+  background-color: #0d0f12;
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: #7bb4ff;
+  border: 1px solid #2a2f36;
+  margin-bottom: 10px;
+}
+.footer article {
+  color:#e6e6e6;
+  display: flex;
+  align-items: center;
+}
+.footer a {
+    color: #7bb4ff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+/* --- Elementos Globais (Busca, Carrinho, Modais) --- */
+#campoBusca {
+  width: 90%;
+  max-width: 380px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Carrinho */
+.cart-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  /* margin-left: 15px; Removido pois o gap do article já cuida do espaço */
+  display: flex;
+  align-items: center;
+  color: white; 
+}
+#cart-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #e50914; 
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.7em;
+  font-weight: bold;
+}
+.cart-sidebar {
+  height: 100vh;
+  width: 0; 
+  position: fixed;
+  z-index: 100; 
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  color: white;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column; 
+}
+.cart-sidebar.open { width: 350px; }
+.cart-header {
+  padding: 10px 20px;
+  padding-top: 20px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+}
+.cart-items { flex-grow: 1; padding: 20px; overflow-y: auto; }
+.cart-footer { padding: 20px; border-top: 1px solid #333; text-align: right; }
+.checkout-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1em;
+}
+
+/* Modais */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 101; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.modal-content {
+  background-color: #1e1e1e;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+  color: white;
+  position: relative;
+}
+.modal-content .close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+#payment-modal button { background-color: #007bff; }
+#confirmation-modal button { background-color: #e50914; }
+
+
+/* ================================================= */
+/* --- ESTILOS EXCLUSIVOS DA LANDING PAGE (Apresentação) --- */
+/* ================================================= */
+
+/* Fonte Especial apenas para Landing Page */
+body.landing-page-body {
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Ajustes do Hero na Landing */
+body.landing-page-body .imagem__principal {
+    height: calc(100vh - 85px);
+    justify-content: center;
+}
+body.landing-page-body .overtext {
+    /* Fundo padrão sem gradiente exótico */
+    background-color: rgba(13, 15, 18, 0.7); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+body.landing-page-body .titulo__imagem {
+    font-size: 55px; /* Grande e impactante */
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+body.landing-page-body .descricao__imagem {
+    font-size: 24px;
+    margin: 0;
+    max-width: 800px;
+    line-height: 1.4;
+    color: #d5d5d5;
+}
+/* Esconder elementos do index.html que não devem aparecer na landing */
+body.landing-page-body .imdb,
+body.landing-page-body .classificacao,
+body.landing-page-body .overtext button {
+    display: none;
+}
+
+/* Seções da Landing Page */
+body.landing-page-body .section {
+    padding: 80px 20px;
+    border-bottom: 1px solid #1a1d22; /* Separação sutil */
+}
+/* Títulos das seções */
+body.landing-page-body h2 {
+    font-size: 36px;
+    color: #7bb4ff;
+    text-align: center;
+    margin-bottom: 50px;
+    text-shadow: 0 0 10px rgba(123, 180, 255, 0.2);
+}
+
+/* Cards Interativos (Diferenciais, Git, etc) */
+body.landing-page-body .info-card {
+    /* Usando cores do tema */
+    background-color: #1a1d22; 
+    border: 1px solid #2a2f36;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+body.landing-page-body .info-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: #7bb4ff; /* Destaque sutil no hover */
+}
+body.landing-page-body .info-card i,
+body.landing-page-body .info-card svg {
+    color: #7bb4ff;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+body.landing-page-body .info-card h3 {
+    color: #e6e6e6;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+body.landing-page-body .info-card p {
+    font-size: 16px;
+    color: #bbb;
+}
+
+/* Botões Estilo Link */
+body.landing-page-body .btn-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 25px;
+    background-color: #2376ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+body.landing-page-body .btn-link:hover {
+    background-color: #1b5fd6;
+    box-shadow: 0 0 10px #1e4fa8;
+}
+
+/* Team Grid - Fotos Grandes */
+body.landing-page-body .team-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+body.landing-page-body .team-member {
+    text-align: center;
+    width: 250px; /* Card largo */
+    transition: transform 0.3s;
+}
+body.landing-page-body .team-member:hover {
+    transform: scale(1.05);
+}
+body.landing-page-body .team-member img {
+    width: 180px; /* Foto bem grande */
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #7bb4ff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    margin-bottom: 15px;
+}
+body.landing-page-body .team-member h3 {
+    color: #7bb4ff;
+    margin: 5px 0;
+}
+
+/* Animação de Scroll (Scroll Reveal) */
+.hidden-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+.visible-scroll {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsividade Landing */
+@media (max-width: 768px) {
+    body.landing-page-body .titulo__imagem { font-size: 36px; }
+    body.landing-page-body .descricao__imagem { font-size: 18px; }
+    body.landing-page-body .section { padding: 50px 15px; }
+}
