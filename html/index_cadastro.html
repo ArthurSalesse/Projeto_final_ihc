@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocaFlix - Cadastre-se</title>
+  </head>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #0d0f12;
+      font-family: sans-serif;
+      color: #e6e6e6;
+    }
+
+    /* Centralização */
+    .log_in {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Card */
+    .texts_log_in {
+      background-color: #1a1d22;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding: 50px 200px;
+      margin-top: 10vh;
+      margin-bottom: 10vh;
+      min-height: 60vh;
+      border-radius: 15px;
+      border: 1px solid #2a2f36;
+      box-shadow: 0 4px 12px #00000060;
+    }
+
+    h1 {
+      font-size: 45px;
+      text-align: center;
+      color: #7bb4ff;
+      text-shadow: 0 0 8px #1a3a5f;
+      margin-bottom: 10px;
+    }
+
+    /* Links estilo botão */
+    a {
+      background-color: #2376ff;
+      font-size: 16px;
+      text-align: center;
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      border: none;
+      transition: 0.2s;
+      box-shadow: 0 0 10px #1e4fa8;
+    }
+
+    a:hover {
+      background-color: #1b5fd6;
+      box-shadow: 0 0 12px #2f80ff;
+    }
+
+    /* Inputs */
+    input {
+      width: 300px;
+      height: 35px;
+      border-radius: 8px;
+      border: 1px solid #2a2f36;
+      background-color: #0d0f12;
+      color: #e6e6e6;
+      padding: 5px 10px;
+      font-size: 16px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #2376ff;
+      box-shadow: 0 0 8px #1e4fa8;
+    }
+
+    /* Dentro do form */
+    form article {
+      display: initial;
+    }
+
+    /* Links dentro do form */
+    form article a {
+      background-color: #2376ff;
+      border-radius: 10px;
+      padding: 8px 14px;
+      color: white;
+      font-weight: bold;
+      transition: 0.2s;
+      border: none;
+    }
+
+    form article a:hover {
+      background-color: #1b5fd6;
+    }
+  </style>
+
+  <body class="log_in">
+    <form action="/login" method="POST" class="texts_log_in" id="formRegistro">
+      <h1>Cadastre-se</h1>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Digite seu email"
+        required
+      />
+
+      <input
+        type="password"
+        id="senha1"
+        name="senha"
+        placeholder="Digite sua senha"
+        required
+      />
+
+      <input
+        type="password"
+        id="senha2"
+        name="senha"
+        placeholder="Repita sua senha"
+        required
+      />
+
+      <a type="submit" id="btnEnviar">Enviar</a>
+    </form>
+    <script>
+      const form = document.getElementById("formRegistro");
+      const btnEnviar = document.getElementById("btnEnviar");
+      const senha1 = document.getElementById("senha1");
+      const senha2 = document.getElementById("senha2");
+
+      btnEnviar.addEventListener("click", function (event) {
+        event.preventDefault(); // evita ir direto para outro lugar
+
+        // validação simples
+        if (!form.checkValidity()) {
+          alert("Por favor, preencha todos os campos corretamente.");
+          return;
+        }
+
+        if (senha1.value !== senha2.value) {
+          alert("As senhas não coincidem.");
+          return;
+        }
+
+        // Se passar na validação, envia o formulário
+        form.submit();
+
+        window.location.href = "index_login.html";
+      });
+      document.getElementById("submit").addEventListener("click", function (e) {
+        e.preventDefault(); // evita o comportamento padrão do link
+        document.getElementById("meuForm").submit(); // envia o formulário
+      });
+    </script>
+  </body>
+</html>
