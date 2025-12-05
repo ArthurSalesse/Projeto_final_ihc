@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Detalhes</title>
+    <style>
+      html {
+        background-color: #0d0f12; /* fundo bem escuro */
+      }
+
+      body {
+        font-family: sans-serif;
+        padding: 40px;
+        max-width: 1000px;
+        margin: auto;
+        color: #e6e6e6;
+      }
+
+      h2 {
+        margin-top: 0;
+        text-align: center;
+        color: #7bb4ff; /* azul suave */
+        text-shadow: 0 0 8px #1a3a5f;
+      }
+
+      #detalhes-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      /* Card principal */
+      .container {
+        display: flex;
+        gap: 40px;
+        align-items: stretch; /* ESSENCIAL */
+        background: #1a1d22; /* cinza grafite */
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px #00000060;
+        border: 1px solid #2a2f36;
+      }
+
+      .capa {
+        width: 280px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px #00000080;
+      }
+
+      .info {
+        flex: 1;
+      }
+
+      .sinopse {
+        font-size: 18px;
+        text-align: justify;
+        line-height: 1.5;
+        color: #d5d5d5;
+      }
+
+      .imdb {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 15px 0;
+        color: #7bb4ff;
+      }
+
+      /* Botão com azul brilhante */
+      button {
+        padding: 12px 25px;
+        background: #2376ff;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 0 10px #1e4fa8;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        background: #1b5fd6;
+        box-shadow: 0 0 12px #2f80ff;
+      }
+
+      /* Trailer */
+      iframe {
+        border-radius: 15px;
+        box-shadow: 0 4px 15px #00000080;
+        align-self: center;
+        border: 1px solid #2a2f36;
+      }
+
+      .info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .info button {
+        margin-top: auto; /* empurra o botão para o fim */
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="notify"
+      style="
+        position: fixed;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #2376ff;
+        padding: 14px 30px;
+        color: white;
+        border-radius: 8px;
+        font-size: 18px;
+        transition: 0.3s;
+      "
+    ></div>
+
+    <h2 id="titulo-filme">MovieStar⭐</h2>
+    <div id="detalhes-container"><p>Carregando detalhes...</p></div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const filme = params.get("filme");
+
+      const detalhes = {
+        "demon-slayer": {
+          capa: "../imagens/DemonSlayer.jpg",
+          trailer: "https://www.youtube.com/embed/3UiP4GwWNv0",
+          sinopse:
+            "Tanjiro embarca no Trem Infinito junto ao Pilar da Chama para enfrentar um poderoso demônio.",
+          imdb: "8.6",
+        },
+        robocop: {
+          capa: "../imagens/robocop.jpg",
+          trailer: "https://www.youtube.com/embed/IqvRDhW-XVA",
+          sinopse:
+            "Um policial é transformado em um ciborgue para combater o crime em Detroit.",
+          imdb: "7.5",
+        },
+        uncharted: {
+          capa: "../imagens/Uncharted.jpeg",
+          trailer: "https://www.youtube.com/embed/eHp3MbsCbMg",
+          sinopse:
+            "Nathan Drake e Sully embarcam em uma caçada ao maior tesouro perdido da história.",
+          imdb: "6.3",
+        },
+        madmax: {
+          capa: "../imagens/MadMax.jpeg",
+          trailer: "https://www.youtube.com/embed/hEJnMQG9ev8",
+          sinopse: "Max se une a Furiosa em uma fuga explosiva pelo deserto.",
+          imdb: "8.1",
+        },
+        wandering: {
+          capa: "../imagens/Wandering.jpg",
+          trailer: "https://www.youtube.com/embed/8ZIfInUTiIg",
+          sinopse: "Uma aventura épica cheia de batalhas e magia.",
+          imdb: "7.0",
+        },
+        thunderbolts: {
+          capa: "../imagens/ThunderBolts.jpg",
+          trailer: "https://www.youtube.com/embed/MaLy0D2FTDc",
+          sinopse: "Um grupo improvável de anti-heróis é reunido pelo governo.",
+          imdb: "7.2",
+        },
+        devoltaparaofuturo: {
+          capa: "../imagens/DeVoltaParaoFuturo.jpeg",
+          trailer: "https://www.youtube.com/embed/R894dvwNo4w",
+          sinopse:
+            "Marty McFly volta no tempo e precisa garantir que seus pais se apaixonem.",
+          imdb: "8.5",
+        },
+        soul: {
+          capa: "../imagens/Soul.jpg",
+          trailer: "https://www.youtube.com/embed/hWBxoH4-4yw",
+          sinopse:
+            "Um professor de música tenta voltar ao seu corpo após um acidente estranho.",
+          imdb: "8.0",
+        },
+        umafamiliafeliz: {
+          capa: "../imagens/UmaFamiliaFeliz.jpg",
+          trailer: "https://www.youtube.com/embed/kIXpxfnzEY0",
+          sinopse: "Uma família passa por transformações mágicas inesperadas.",
+          imdb: "6.1",
+        },
+        petsavidaselvagem: {
+          capa: "../imagens/PetsaVidaSelvagem.webp",
+          trailer: "https://www.youtube.com/embed/9Ia6FKg_IUU",
+          sinopse:
+            "Animais domésticos precisam sobreviver quando ficam presos em uma ilha selvagem.",
+          imdb: "5.3",
+        },
+        estreladebelem: {
+          capa: "../imagens/EstreladeBelem.jpg",
+          trailer: "https://www.youtube.com/embed/yRC4f3s6b4I",
+          sinopse:
+            "A história do nascimento de Jesus sob a perspectiva dos animais.",
+          imdb: "6.2",
+        },
+        acaminhodecasa: {
+          capa: "../imagens/aCaminhodeCasa.jpg",
+          trailer: "https://www.youtube.com/embed/rhSKciA8erE",
+          sinopse:
+            "Uma cadelinha enfrenta uma longa jornada para voltar ao seu dono.",
+          imdb: "6.9",
+        },
+        divertidamente: {
+          capa: "../imagens/Divertidamente.webp",
+          trailer: "https://www.youtube.com/embed/w2YRoV--CHo",
+          sinopse:
+            "As emoções de uma garota precisam lidar com mudanças em sua vida.",
+          imdb: "8.1",
+        },
+        nacompanhiadomal: {
+          capa: "../imagens/naCompanhiadoMal.webp",
+          trailer: "https://www.youtube.com/embed/zCw60uISw5U",
+          sinopse: "Um jovem encontra uma entidade maligna que o acompanha.",
+          imdb: "6.7",
+        },
+        sessao9: {
+          capa: "../imagens/session9.jpg",
+          trailer: "https://www.youtube.com/embed/4s-5eJq47bY",
+          sinopse:
+            "Uma equipe de limpeza enfrenta eventos aterrorizantes em um hospital psiquiátrico.",
+          imdb: "6.4",
+        },
+        cadaver: {
+          capa: "../imagens/Cadaver.webp",
+          trailer: "https://www.youtube.com/embed/Iz-kcZujnEU",
+          sinopse: "Um jantar misterioso se transforma em um pesadelo real.",
+          imdb: "5.8",
+        },
+        aentidade: {
+          capa: "../imagens/Sinister.jpg",
+          trailer: "https://www.youtube.com/embed/yv9oGgGDBQE",
+          sinopse:
+            "Um escritor encontra fitas que registram assassinatos brutais.",
+          imdb: "6.8",
+        },
+        itacoisa: {
+          capa: "../imagens/ItaCoisa.jpg",
+          trailer: "https://www.youtube.com/embed/dD264ZjfKlk",
+          sinopse:
+            "Crianças enfrentam uma criatura maligna que assume a forma de um palhaço.",
+          imdb: "7.3",
+        },
+        falecomigo: {
+          capa: "../imagens/FaleComigo.webp",
+          trailer: "https://www.youtube.com/embed/zIt5jSNPxNI",
+          sinopse:
+            "Jovens brincam com um objeto que permite contato com espíritos.",
+          imdb: "7.1",
+        },
+        super8: {
+          capa: "../imagens/Super8.jpg",
+          trailer: "https://www.youtube.com/embed/t-0XuYxh67w",
+          sinopse: "Jovens filmam um desastre que revela um segredo militar.",
+          imdb: "7.0",
+        },
+        naselva: {
+          capa: "../imagens/NaSelva.jpg",
+          trailer: "https://www.youtube.com/embed/vQaLraAr8OY",
+          sinopse:
+            "Um grupo tenta sobreviver na floresta após se perderem durante uma expedição.",
+          imdb: "6.2",
+        },
+        dungeonsedragons: {
+          capa: "../imagens/DungeonsEdragons.jpg",
+          trailer: "https://www.youtube.com/embed/4ej5yjOqBMI",
+          sinopse: "Aventura épica baseada no famoso RPG.",
+          imdb: "7.3",
+        },
+        agrandemuralha: {
+          capa: "../imagens/AGrandeMuralha.jpg",
+          trailer: "https://www.youtube.com/embed/gd2n92fKtvo",
+          sinopse:
+            "Guerreiros enfrentam criaturas antigas na Grande Muralha da China.",
+          imdb: "5.9",
+        },
+        monsterhunter: {
+          capa: "../imagens/MonsterHunter.jpg",
+          trailer: "https://www.youtube.com/embed/3od-kQMTZ9M",
+          sinopse:
+            "Soldados são transportados para um mundo cheio de monstros gigantes.",
+          imdb: "5.3",
+        },
+        osenhordosaneis: {
+          capa: "../imagens/OsenhordosAneis.jpg",
+          trailer: "https://www.youtube.com/embed/0i86oM1nHjM",
+          sinopse:
+            "Um hobbit precisa destruir um anel capaz de corromper toda a humanidade.",
+          imdb: "8.8",
+        },
+      };
+
+      const info = detalhes[filme];
+      const container = document.getElementById("detalhes-container");
+      const titulo = document.getElementById("titulo-filme");
+
+      if (info) {
+        titulo.textContent = filme.toUpperCase();
+        container.innerHTML = `
+          <div class="container">
+            <img class="capa" src="${info.capa}" alt="Capa do filme" />
+            <div class="info">
+              <p class="sinopse"><strong>Sinopse:</strong> ${info.sinopse}</p>
+              <p class="imdb">⭐ IMDb: ${info.imdb}</p>
+              <button onclick="notify('Adicionado ao carrinho!')">Adicionar ao Carrinho</button>
+            </div>
+          </div>
+          <iframe width="80%" height="450" src="${info.trailer}" allowfullscreen></iframe
+        `;
+      } else {
+        container.innerHTML = "<p>Detalhes não encontrados.</p>";
+      }
+    </script>
+
+    <script src="../js/interaction.js"></script>
+  </body>
+</html>
