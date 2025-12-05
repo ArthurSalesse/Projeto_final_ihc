@@ -1,125 +1,77 @@
 # Projeto_final_ihc
 
-LocaFlix ⭐ - O Cinema na Sua Mão
+LocaFlix ⭐ — O Cinema na Sua Mão
 
-Bem-vindo ao repositório oficial da LocaFlix, uma plataforma moderna de locação de filmes digitais. Este projeto foi desenvolvido como parte de um trabalho acadêmico de Interação Humano-Computador (IHC), focado na criação de uma interface intuitiva, acessível e visualmente impactante.
+> Bem-vindo ao repositório oficial da **LocaFlix**, uma plataforma de locação de filmes digitais desenvolvida como trabalho acadêmico de **Interação Humano-Computador (IHC)**. Interface intuitiva, acessível e visualmente impactante — pague apenas pelo que assistir.
 
-📋 Sobre o Projeto
+---
 
-A LocaFlix nasceu da necessidade de simplificar o acesso a filmes de qualidade sem a obrigatoriedade de assinaturas mensais complexas. Nossa filosofia é: "Pague apenas pelo que assistir".
+## Sobre o Projeto
 
-A Landing Page apresentada neste repositório serve como a porta de entrada para o produto, destacando nossos diferenciais, equipe e conceito visual.
+A **LocaFlix** tem como missão simplificar o acesso a filmes de qualidade sem assinaturas mensais obrigatórias. Modelo **pay-per-view**: pague somente pelo conteúdo assistido.
 
-Principais Diferenciais
+A landing page neste repositório apresenta a proposta do produto, identidade visual, diferenciais e a equipe envolvida.
 
-Zero Mensalidade: Modelo Pay-per-view puro.
+### Principais diferenciais
+- **Zero Mensalidade** — modelo Pay-per-view.
+- **Catálogo Premium** — foco em lançamentos e clássicos selecionados.
+- **Transparência** — preço fixo, sem taxas ocultas.
 
-Catálogo Premium: Foco em lançamentos e clássicos selecionados.
+---
 
-Transparência: Preço fixo e sem taxas ocultas.
+##  Tecnologias Utilizadas
 
-🚀 Tecnologias Utilizadas
+- **HTML5** — estrutura semântica e acessível.  
+- **CSS3**
+  - Variáveis CSS (`:root`) para temas e cores.  
+  - Flexbox & Grid para responsividade.  
+  - Animações e efeitos (IntersectionObserver).
+- **JavaScript (Vanilla)**
+  - Manipulação do DOM.  
+  - Observers para animações de entrada.
+- **Bibliotecas externas**
+  - *Lucide Icons* — ícones leves.  
+  - *Google Fonts* — Inter e Oswald.
 
-O projeto foi construído utilizando tecnologias web modernas, focando em performance e semântica.
+---
 
-HTML5: Estrutura semântica e acessível.
+##  Design & Metodologia
 
-CSS3:
+- Metodologia: **Design Sprint** — ciclos rápidos de validação e prototipação.  
+- Identidade visual: **Cinema Dark** (modo escuro) para imersão.
+  - Cor primária: **Azul Neon** (`#3b82f6`) para CTAs.
+  - Background: tons de preto/cinza (`#0f1115`, `#1a1d21`).
+  - Tipografia: **Oswald** (títulos) e **Inter** (corpo de texto).
 
-Variáveis CSS (:root): Para fácil manutenção de temas e cores.
+---
 
-Flexbox & Grid Layout: Para responsividade avançada.
+## Time
 
-Animações: Transições suaves e efeitos de scroll (IntersectionObserver).
+| Nome                    | Função                         |
+|-------------------------|--------------------------------|
+| Arthur Salesse Gonzaga  | Desenvolvimento / Líder Técnico |
+| Leonardo Furlan         | Desenvolvedor Fullstack         |
+| Otávio Pasqual          | Designer de Interface (UI/UX)   |
+| João Lourenço           | Decisor / Planejamento          |
+| Rafael Afonso           | Marketing                       |
 
-JavaScript (Vanilla):
+---
 
-Manipulação do DOM.
+##  Como Executar
 
-Integração com biblioteca de ícones.
+Projeto estático — leve e fácil de rodar.
 
-Observadores de interseção para animações de entrada.
+### Pré-requisitos  
+- Navegador moderno (Chrome, Firefox, Edge, Safari).
 
-Bibliotecas Externas:
+### Passos
+```bash
+# clonar repositório
+git clone https://github.com/ArthurSalesse/Projeto_final_ihc.git
 
-Lucide Icons: Para ícones leves e modernos.
+# entrar na pasta do projeto
+cd Projeto_final_ihc
 
-Google Fonts: Tipografia (Famílias Inter e Oswald).
-
-🎨 Design & Metodologia
-
-Para o desenvolvimento deste projeto, utilizamos a metodologia Design Sprint, que nos permitiu validar ideias e prototipar soluções de forma ágil.
-
-Identidade Visual (Dark Mode)
-
-Optamos por uma paleta "Cinema Dark" para imersão total:
-
-Cor Primária: Azul Neon (#3b82f6) para CTAs e destaques.
-
-Background: Variações de cinza chumbo e preto (#0f1115, #1a1d21).
-
-Tipografia: Oswald para títulos impactantes e Inter para leitura fluida.
-
-👥 Nosso Time
-
-Este projeto não seria possível sem a colaboração dos seguintes membros:
-
-Membro
-
-Função
-
-Arthur Salesse Gonzaga
-
-Desenvolvimento / Líder Técnico
-
-Leonardo Furlan
-
-Desenvolvedor Fullstack
-
-Otávio Pasqual
-
-Designer de Interface (UI/UX)
-
-João Lourenço
-
-Decisor / Planejamento
-
-Rafael Afonso
-
-Marketing
-
-🔧 Como Executar
-
-Este é um projeto estático, o que significa que ele é super leve e fácil de rodar.
-
-Pré-requisitos
-
-Apenas um navegador web moderno (Chrome, Firefox, Edge, Safari).
-
-Passo a Passo
-
-Clone este repositório:
-
-git clone [https://github.com/ArthurSalesse/Projeto_final_ihc.git](https://github.com/ArthurSalesse/Projeto_final_ihc.git)
-
-
-Navegue até a pasta do projeto.
-
-Abra o arquivo index.html no seu navegador.
-
-📄 Estrutura de Arquivos
-
-/
-├── index.html        # Página Principal (Landing Page)
-├── index_login.html  # Página de Login (Linkada no header)
-├── style.css         # (Opcional se não estiver usando estilo inline)
-└── README.md         # Documentação
-
-
-📝 Licença
-
-Este projeto está sob a licença MIT. Sinta-se à vontade para usar, modificar e distribuir.
-
-<p align="center">
-Desenvolvido com 💙 pela equipe LocaFlix
-</p>
+# abrir index.html no navegador
+xdg-open index.html     # Linux
+open index.html         # macOS
