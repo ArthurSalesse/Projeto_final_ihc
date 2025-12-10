@@ -117,6 +117,7 @@
         border-radius: 8px;
         font-size: 18px;
         transition: 0.3s;
+        z-index: 9999;
       "
     ></div>
 
@@ -143,14 +144,14 @@
           imdb: "7.5",
         },
         uncharted: {
-          capa: "../imagens/Uncharted.jpeg",
+          capa: "../imagens/Uncharted.png",
           trailer: "https://www.youtube.com/embed/eHp3MbsCbMg",
           sinopse:
             "Nathan Drake e Sully embarcam em uma caçada ao maior tesouro perdido da história.",
           imdb: "6.3",
         },
         madmax: {
-          capa: "../imagens/MadMax.jpeg",
+          capa: "../imagens/MadMax.png",
           trailer: "https://www.youtube.com/embed/hEJnMQG9ev8",
           sinopse: "Max se une a Furiosa em uma fuga explosiva pelo deserto.",
           imdb: "8.1",
@@ -162,13 +163,13 @@
           imdb: "7.0",
         },
         thunderbolts: {
-          capa: "../imagens/ThunderBolts.jpg",
+          capa: "../imagens/Thunderbolts.png",
           trailer: "https://www.youtube.com/embed/MaLy0D2FTDc",
           sinopse: "Um grupo improvável de anti-heróis é reunido pelo governo.",
           imdb: "7.2",
         },
         devoltaparaofuturo: {
-          capa: "../imagens/DeVoltaParaoFuturo.jpeg",
+          capa: "../imagens/DeVoltaParaoFuturo.png",
           trailer: "https://www.youtube.com/embed/R894dvwNo4w",
           sinopse:
             "Marty McFly volta no tempo e precisa garantir que seus pais se apaixonem.",
@@ -182,7 +183,7 @@
           imdb: "8.0",
         },
         umafamiliafeliz: {
-          capa: "../imagens/UmaFamiliaFeliz.jpg",
+          capa: "../imagens/UmaFamiliaFeliz.png",
           trailer: "https://www.youtube.com/embed/kIXpxfnzEY0",
           sinopse: "Uma família passa por transformações mágicas inesperadas.",
           imdb: "6.1",
@@ -209,7 +210,7 @@
           imdb: "6.9",
         },
         divertidamente: {
-          capa: "../imagens/Divertidamente.webp",
+          capa: "../imagens/Divertidamente.png",
           trailer: "https://www.youtube.com/embed/w2YRoV--CHo",
           sinopse:
             "As emoções de uma garota precisam lidar com mudanças em sua vida.",
@@ -302,23 +303,46 @@
       const titulo = document.getElementById("titulo-filme");
 
       if (info) {
-        titulo.textContent = filme.toUpperCase();
+        titulo.textContent = (detalhes[filme] && typeof filme === "string") ? (detalhes[filme] ? (detalhes[filme].titulo || filme.toUpperCase()) : filme.toUpperCase()) : filme.toUpperCase();
+        // O objeto 'detalhes' contém as propriedades necessárias; monta o card:
         container.innerHTML = `
           <div class="container">
             <img class="capa" src="${info.capa}" alt="Capa do filme" />
             <div class="info">
               <p class="sinopse"><strong>Sinopse:</strong> ${info.sinopse}</p>
               <p class="imdb">⭐ IMDb: ${info.imdb}</p>
-              <button onclick="notify('Adicionado ao carrinho!')">Adicionar ao Carrinho</button>
+              <button id="btn-add">Adicionar ao Carrinho</button>
             </div>
           </div>
           <iframe width="80%" height="450" src="${info.trailer}" allowfullscreen></iframe>
         `;
+
+        // conecta o botão ao addToCart (função de interacao.js)
+        const btnAdd = document.getElementById('btn-add');
+        if (btnAdd) {
+          btnAdd.addEventListener('click', () => {
+            // chama a função global addToCart (definida em interacao.js)
+            if (typeof addToCart === 'function') {
+              addToCart(filme);
+            } else {
+              // Se o script ainda não carregou, salva temporariamente no localStorage diretamente
+              let temp = JSON.parse(localStorage.getItem('carrinho')) || [];
+              if (!temp.some(i => i.id === filme)) {
+                temp.push({ id: filme, name: filme, price: 7.9 });
+                localStorage.setItem('carrinho', JSON.stringify(temp));
+                notify('Adicionado ao carrinho!');
+              } else {
+                notify('Filme já estava no carrinho.');
+              }
+            }
+          });
+        }
       } else {
         container.innerHTML = "<p>Detalhes não encontrados.</p>";
       }
     </script>
 
-    <script src="../js/interacao.js"></script>
+    <!-- importa a lógica do carrinho e interações -->
+    <script src="../js/interacao.js" defer></script>
   </body>
 </html>

@@ -409,3 +409,19 @@ body.landing-page-body .team-member h3 {
     body.landing-page-body .descricao__imagem { font-size: 18px; }
     body.landing-page-body .section { padding: 50px 15px; }
 }
+
+.mensagem {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1a1d22;
+    border: 1px solid #2376ff;
+    padding: 12px 20px;
+    color: #e6e6e6;
+    font-weight: bold;
+    border-radius: 10px;
+    display: none;
+    box-shadow: 0 0 12px #00000070;
+    z-index: 9999;
+}

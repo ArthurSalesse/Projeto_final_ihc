@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,18 +10,39 @@
       rel="stylesheet"
     />
     <title>LocaFlix</title>
+    <style>
+      /* Pequeno ajuste para o badge de contador */
+      .cart-icon-button { position: relative; }
+      #cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #ff3b3b;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 12px;
+      }
+
+      /* Estilos mínimos para sidebar quando .open */
+      .cart-sidebar { transition: transform 0.3s ease; transform: translateX(100%); position: fixed; right: 0; top: 0; height: 100%; width: 320px; background: #111214; color: #e6e6e6; box-shadow: -8px 0 24px rgba(0,0,0,0.6); z-index: 9998; padding: 16px; }
+      .cart-sidebar.open { transform: translateX(0); }
+      .close-btn { background: transparent; color: #e6e6e6; border: none; font-size: 22px; cursor: pointer; }
+      .cart-items { margin-top: 12px; max-height: 60vh; overflow-y: auto; }
+      .checkout-btn { background: #2376ff; color: white; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+    </style>
   </head>
 
   <body class="app">
     <div id="cart-sidebar" class="cart-sidebar">
-      <div class="cart-header">
+      <div class="cart-header" style="display:flex; justify-content:space-between; align-items:center;">
         <h3>🛒 Meu Carrinho</h3>
         <button class="close-btn" onclick="toggleCartSidebar()">×</button>
       </div>
       <div id="cart-items" class="cart-items">
         <p>Nenhum filme no carrinho.</p>
       </div>
-      <div class="cart-footer">
+      <div class="cart-footer" style="position: absolute; bottom: 20px; left: 16px; right:16px;">
         <p>Total: <span id="cart-total">R$ 0,00</span></p>
         <button class="checkout-btn" onclick="openPaymentModal()">
           Finalizar Compra
@@ -29,29 +50,22 @@
       </div>
     </div>
 
-    <div id="payment-modal" class="modal">
-      <div class="modal-content">
+    <div id="payment-modal" class="modal" style="display:none;">
+      <div class="modal-content" style="background:#1a1d22; color:#e6e6e6; padding:18px; border-radius:8px; max-width:400px; margin: 80px auto;">
         <span class="close-btn" onclick="closePaymentModal()">&times;</span>
         <h4>Selecione a Opção de Pagamento</h4>
-        <div id="payment-options">
-          <label
-            ><input type="radio" name="payment" value="credit-card" /> Cartão de
-            Crédito</label
-          >
-          <label><input type="radio" name="payment" value="pix" /> Pix</label>
-          <label
-            ><input type="radio" name="payment" value="boleto" /> Boleto</label
-          >
+        <div id="payment-options" style="margin:12px 0;">
+          <label style="display:block; margin-bottom:6px;"><input type="radio" name="payment" value="credit-card" /> Cartão de Crédito</label>
+          <label style="display:block; margin-bottom:6px;"><input type="radio" name="payment" value="pix" /> Pix</label>
+          <label style="display:block; margin-bottom:6px;"><input type="radio" name="payment" value="boleto" /> Boleto</label>
         </div>
         <button onclick="confirmPayment()">Confirmar Pagamento</button>
       </div>
     </div>
 
-    <div id="confirmation-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-btn" onclick="closeConfirmationModal()"
-          >&times;</span
-        >
+    <div id="confirmation-modal" class="modal" style="display:none;">
+      <div class="modal-content" style="background:#1a1d22; color:#e6e6e6; padding:18px; border-radius:8px; max-width:500px; margin: 80px auto;">
+        <span class="close-btn" onclick="closeConfirmationModal()">&times;</span>
         <h4 id="confirmation-message"></h4>
         <button onclick="closeConfirmationModal()">Fechar</button>
       </div>
@@ -62,8 +76,13 @@
         <p href="logo">LocaFlix⭐</p>
         <input type="text" id="campoBusca" placeholder="🔍​Buscar filme..." />
         <article>
-        <a class="cabecalho__click" href="landing.html">Mais informações</a>
-        <a class="cabecalho__click" href="index_login.html">Login</a>
+          <span class="ola" id="welcomeUser" style="font-size: 18px;"></span>
+          <a class="cabecalho__click" href="landing.html">Mais informações</a>
+          <a class="cabecalho__click" id="btnLogin" href="index_login.html">Login</a>
+          <a class="cabecalho__click" id="btnLogout" style="display:none; cursor:pointer;" onclick="logout()">
+              Sair
+          </a>
+
 
           <button class="cart-icon-button" onclick="toggleCartSidebar()">
             <span id="cart-count">0</span>
@@ -139,7 +158,7 @@
           </article>
 
           <article class="filme">
-            <img src="../imagens/ThunderBolts.jpg" alt="thunderbolts" />
+            <img src="../imagens/Thunderbolts.png" alt="thunderbolts" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
               <button onclick="addToCart('thunderbolts')">
@@ -155,10 +174,10 @@
           </article>
 
           <article class="filme">
-            <img src="../imagens/Uncharted.jpeg" alt="Uncharted" />
+            <img src="../imagens/Uncharted.png" alt="Uncharted" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Uncharted')">
+              <button onclick="addToCart('uncharted')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -171,10 +190,10 @@
           </article>
 
           <article class="filme">
-            <img src="../imagens/MadMax.jpeg" alt="MadMax" />
+            <img src="../imagens/MadMax.png" alt="MadMax" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('MadMax')">
+              <button onclick="addToCart('madmax')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -188,12 +207,12 @@
 
           <article class="filme">
             <img
-              src="../imagens/DeVoltaParaoFuturo.jpeg"
+              src="../imagens/DeVoltaParaoFuturo.png"
               alt="De Volta Para o Futuro"
             />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('De Volta Para o Futuro')">
+              <button onclick="addToCart('devoltaparaofuturo')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -216,7 +235,7 @@
             <img src="../imagens/Soul.jpg" alt="Soul" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Soul')">Adicionar ao carrinho</button
+              <button onclick="addToCart('soul')">Adicionar ao carrinho</button
               ><br />
               <button onclick="window.location.href='detalhes.html?filme=soul'">
                 Detalhes
@@ -225,10 +244,10 @@
           </article>
 
           <article class="filme">
-            <img src="../imagens/UmaFamiliaFeliz.jpg" alt="Uma Familia Feliz" />
+            <img src="../imagens/UmaFamiliaFeliz.png" alt="Uma Familia Feliz" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Uma Familia Feliz')">
+              <button onclick="addToCart('umafamiliafeliz')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -247,7 +266,7 @@
             />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Pets a Vida Selvagem')">
+              <button onclick="addToCart('petsavidaselvagem')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -263,7 +282,7 @@
             <img src="../imagens/EstreladeBelem.jpg" alt="Estrela de Belem" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Estrela de Belem')">
+              <button onclick="addToCart('estreladebelem')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -279,7 +298,7 @@
             <img src="../imagens/aCaminhodeCasa.jpg" alt="A Caminho de Casa" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('A Caminho de Casa')">
+              <button onclick="addToCart('acaminhodecasa')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -292,10 +311,10 @@
           </article>
 
           <article class="filme">
-            <img src="../imagens/Divertidamente.webp" alt="Divertidamente" />
+            <img src="../imagens/Divertidamente.png" alt="Divertidamente" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Divertidamente')">
+              <button onclick="addToCart('divertidamente')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -321,7 +340,7 @@
             />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Na Companhia do Mal')">
+              <button onclick="addToCart('nacompanhiadomal')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -337,7 +356,7 @@
             <img src="../imagens/session9.jpg" alt="Sessão 9" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Sessão 9')">
+              <button onclick="addToCart('sessao9')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -353,7 +372,7 @@
             <img src="../imagens/Cadaver.webp" alt="Cadaver" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Cadaver')">
+              <button onclick="addToCart('cadaver')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -369,7 +388,7 @@
             <img src="../imagens/Sinister.jpg" alt="A Entidade" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('A Entidade')">
+              <button onclick="addToCart('aentidade')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -385,7 +404,7 @@
             <img src="../imagens/ItaCoisa.jpg" alt="It a Coisa" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('It a Coisa')">
+              <button onclick="addToCart('itacoisa')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -401,7 +420,7 @@
             <img src="../imagens/FaleComigo.webp" alt="Fale Comigo" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Fale Comigo')">
+              <button onclick="addToCart('falecomigo')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -424,7 +443,7 @@
             <img src="../imagens/Super8.jpg" alt="Super 8" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Super 8')">
+              <button onclick="addToCart('super8')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -440,7 +459,7 @@
             <img src="../imagens/NaSelva.jpg" alt="Na Selva" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Na Selva')">
+              <button onclick="addToCart('naselva')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -459,7 +478,7 @@
             />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Dungeons e Dragons')">
+              <button onclick="addToCart('dungeonsedragons')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -475,7 +494,7 @@
             <img src="../imagens/AGrandeMuralha.jpg" alt="A Grande Muralha" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('A Grande Muralha')">
+              <button onclick="addToCart('agrandemuralha')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -491,7 +510,7 @@
             <img src="../imagens/MonsterHunter.jpg" alt="Monster Hunter" />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('Monster Hunter')">
+              <button onclick="addToCart('monsterhunter')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -510,7 +529,7 @@
             />
             <div class="overlay">
               <p>Alugar por R$ 7,90</p>
-              <button onclick="addToCart('O Senhor dos Anéis')">
+              <button onclick="addToCart('osenhordosaneis')">
                 Adicionar ao carrinho
               </button>
               <br />
@@ -551,9 +570,20 @@
         border-radius: 8px;
         font-size: 18px;
         transition: 0.3s;
+        z-index: 9999;
       "
     ></div>
 
-    <script src="../js/interacao.js"></script>
+    <script src="../js/interacao.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script>
+      // Função toggleCartSidebar precisa existir globalmente (interacao.js não tem toggle,
+      // porque a versão original usava toggleCartSidebar). Implementamos simples aqui:
+      function toggleCartSidebar() {
+        const sidebar = document.getElementById('cart-sidebar');
+        if (!sidebar) return;
+        sidebar.classList.toggle('open');
+      }
+    </script>
   </body>
 </html>
